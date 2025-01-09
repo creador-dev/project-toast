@@ -21,7 +21,8 @@ function ToastPlayground() {
     setToasts(nextToasts);
   };
 
-  function handleClick() {
+  function handleSubmit(event) {
+    event.preventDefault();
     const toast = {
       id: crypto.randomUUID(),
       variant,
@@ -37,7 +38,11 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
       <ToastShelf toasts={toasts} handleDismiss={removeToast} />
-      <div className={styles.controlsWrapper}>
+      <form
+        name="toast-form"
+        onSubmit={handleSubmit}
+        className={styles.controlsWrapper}
+      >
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -78,10 +83,10 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={handleClick}>Pop Toast!</Button>
+            <Button>Pop Toast!</Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
