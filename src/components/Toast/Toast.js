@@ -18,23 +18,23 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ status = "notice", content, onDismiss }) {
-  const IconTag = ICONS_BY_VARIANT[status];
+function Toast({ variant = "notice", children, onDismiss }) {
+  const IconTag = ICONS_BY_VARIANT[variant];
 
   if (!IconTag) {
     throw new Error(
-      `${status} isn't a correct status. Valid status: ${Object.keys(
+      `${variant} isn't a correct variant. Valid variant: ${Object.keys(
         ICONS_BY_VARIANT
       )}`
     );
   }
 
   return (
-    <div className={`${styles.toast} ${styles[status]}`}>
+    <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
         <IconTag size={24} />
       </div>
-      <p className={styles.content}>{content}</p>
+      <p className={styles.content}>{children}</p>
       <button className={styles.closeButton} onClick={onDismiss}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
