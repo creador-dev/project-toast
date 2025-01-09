@@ -12,24 +12,15 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState("notice");
-  const { toasts, setToasts } = React.useContext(ToastContext);
+  const { toasts, createToast, dismissToast } = React.useContext(ToastContext);
 
   const removeToast = (id) => {
-    const nextToasts = toasts.filter((toast) => {
-      return toast.id !== id;
-    });
-
-    setToasts(nextToasts);
+    dismissToast(id);
   };
 
   function handleSubmit(event) {
     event.preventDefault();
-    const toast = {
-      id: crypto.randomUUID(),
-      variant,
-      children: message,
-    };
-    setToasts([...toasts, toast]);
+    createToast(message, variant);
   }
 
   return (
