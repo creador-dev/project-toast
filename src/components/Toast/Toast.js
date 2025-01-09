@@ -20,6 +20,15 @@ const ICONS_BY_VARIANT = {
 
 function Toast({ status = "notice", content, onDismiss }) {
   const IconTag = ICONS_BY_VARIANT[status];
+
+  if (!IconTag) {
+    throw new Error(
+      `${status} isn't a correct status. Valid status: ${Object.keys(
+        ICONS_BY_VARIANT
+      )}`
+    );
+  }
+
   return (
     <div className={`${styles.toast} ${styles[status]}`}>
       <div className={styles.iconContainer}>
