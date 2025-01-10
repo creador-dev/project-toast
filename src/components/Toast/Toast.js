@@ -34,7 +34,10 @@ function Toast({ variant = "notice", children, onDismiss }) {
       <div className={styles.iconContainer}>
         <IconTag size={24} />
       </div>
-      <p className={styles.content}>{children}</p>
+      <p className={styles.content}>
+        <VisuallyHidden>{variant}</VisuallyHidden>
+        {children}
+      </p>
       <button
         className={styles.closeButton}
         onClick={onDismiss}

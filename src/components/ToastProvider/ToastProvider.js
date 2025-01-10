@@ -26,11 +26,11 @@ function ToastProvider({ children }) {
     setToasts(nextToasts);
   }
 
-  function dismissAll() {
+  const handleEscape = React.useCallback(() => {
     setToasts([]);
-  }
+  }, []);
 
-  useEscapeKey(dismissAll);
+  useEscapeKey(handleEscape);
 
   return (
     <ToastContext.Provider
